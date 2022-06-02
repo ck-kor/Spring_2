@@ -1,0 +1,151 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+
+<!--    <script>-->
+<!--        function isValidReply(reply){-->
+<!--            if (reply =='') {-->
+<!--                alert('내용을 입력해주세요');-->
+<!--                return false;-->
+<!--            }-->
+<!--            return true;-->
+<!--        }-->
+
+<!--        function writeReply() {-->
+<!--            let reply = $('#reply').val();-->
+<!--            if (!isValidReply(reply)) {-->
+<!--                return;-->
+<!--            }-->
+<!--            let idx = location.href.split("id=")[1];-->
+<!--            let data = {'reply':reply, 'id':idx};-->
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: `/api/reply/${idx}`,-->
+<!--                contentType: "application/json",-->
+<!--                data: JSON.stringify(data),-->
+<!--                success: function (response) {-->
+<!--                    alert('댓글이 작성되었습니다.');-->
+<!--                    window.location.reload();-->
+<!--                },-->
+<!--                error: function () {-->
+<!--                    alert("로그인 해주세요");-->
+<!--                }-->
+
+<!--            })-->
+
+<!--        }-->
+<!--        // 댓글들을 불러옵니다.-->
+<!--        function getReply() {-->
+<!--            let idx = location.href.split("id=")[1];-->
+<!--            $.ajax({-->
+<!--                type: "GET",-->
+<!--                url: `/api/reple/${idx}`,-->
+<!--                data: {},-->
+<!--                success: function (reponse) {-->
+<!--                    for (let i=0; i<reponse.length; i++) {-->
+<!--                        let comment = reponse[i];-->
+<!--                        let id = comment.id;-->
+<!--                        let name = comment.name;-->
+<!--                        let reply = comment.reply;-->
+<!--                        let modifiedAt = comment.modifiedAt;-->
+<!--                        addComment(id, name, reply, modifiedAt);-->
+<!--                    }-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+
+<!--        function addComment(id, name, reply, modifiedAt) {-->
+<!--            let temp = makeReply(id, name, reply, modifiedAt);-->
+<!--            $('#reply-box').append(temp);-->
+<!--        }-->
+
+<!--        function makeReply(id, name, reply, modifiedAt) {-->
+<!--            return `<div class="card">-->
+<!--                        <div class="metadata">-->
+<!--                           <div ${id}=${id}-name" class="name">-->
+<!--                               ${name}-->
+<!--                           </div>-->
+<!--                           <div class="date">-->
+<!--                               ${modifiedAt}-->
+<!--                           </div>-->
+<!--                        </div>-->
+<!--                        <div class="contents" id=${id}-reply">-->
+<!--                           ${reply}-->
+<!--                        </div>-->
+<!--                        <div id=${id}-editarea" class="edit">-->
+<!--                            <textarea id=${id}-textarea" class="te-edit" name="" cols="30" rows="5"></textarea>-->
+<!--                        </div>-->
+<!--                            <div class="footer hide">-->
+<!--                                <img id=${id}-edit" class="icon-start-edit" src="images/edit.png" alt="" onclick="editPost(${id})">-->
+<!--                                <img id=${id}-delete" class="icon-delete" src="images/delete.png" alt="" onclick="deleteReply(${id})">-->
+<!--                                <img id=${id}-submit" class="icon-end-edit" src="images/done.png" alt="" onclick="submitEdit(${id})">-->
+<!--                            </div>-->
+<!--                    </div>`;-->
+
+<!--        }-->
+
+<!--        // 댓글 삭제-->
+<!--        function deleteReply(id) {-->
+<!--            let idx = location.href.split("id=")[1];-->
+<!--            $.ajax({-->
+<!--                type: "DELETE",-->
+<!--                url: `/api/reply/${idx}`,-->
+<!--                data: JSON.stringify({'idx':id}),-->
+<!--                success: function (reponse) {-->
+<!--                    alert("댓글이 삭제되었습니다.");-->
+<!--                    window.location.reload();-->
+<!--                }-->
+<!--            })-->
+<!--        }-->
+
+<!--        // 댓글 수정 활성화-->
+<!--        function editActive(id) {-->
+<!--            let one = document.getElementById(id-reply);-->
+<!--            let two = document.getElementById(id-editarea);-->
+<!--            one.style.display = 'none';-->
+<!--            two.style.display = 'block';-->
+<!--        }-->
+<!--        // 댓글 수정 비활성화-->
+<!--        function editInActive(id) {-->
+<!--            let one = document.getElementById(id-reply);-->
+<!--            let two = document.getElementById(id-editarea);-->
+<!--            one.style.display = '';-->
+<!--            two.style.display = '';-->
+<!--        }-->
+
+
+<!--        // 댓글 수정 모드-->
+<!--        function editPost(id) {-->
+<!--            editActive(id);-->
+<!--        }-->
+
+
+
+<!--        // 수정된 댓글 보내기-->
+
+<!--        function submitEdit(id) {-->
+<!--            let reply = $('#id-reply').val();-->
+<!--            let data = {'id':id, 'reply':reply}-->
+<!--            let idx = location.href.split("id=")[1];-->
+<!--            $.ajax({-->
+<!--                type: "PUT",-->
+<!--                url: `/api/reply/${idx}`,-->
+<!--                contentType: "application/json",-->
+<!--                data: JSON.stringify(data),-->
+<!--                success: function (reponse) {-->
+<!--                    alert("댓글이 수정되었습니다다.");-->
+<!--                    editInActive(id);-->
+<!--                   window.location.reload();-->
+<!--                }-->
+<!--            })-->
+<!--        }-->
+
+
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--</body>-->
+<!--</html>-->
